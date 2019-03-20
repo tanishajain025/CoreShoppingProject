@@ -37,11 +37,12 @@
                            <div class="btn-group">
                                @*<button type="button" class="btn btn-sm btn-outline-secondary">View Details</button>*@
                                @*<button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>*@
-                               <a asp-controller="Cart" asp-action="Buy" asp-route-id="@item.ProductId" onclick="alert('Added To cart')" class="btn btn-sm btn-outline-secondary"> Add to Cart </a>
+                               <a asp-controller="Cart" asp-action="Buy" asp-route-id="@item.ProductId" onclick="alert('Added To cart')" class="btn btn-sm btn-outline-secondary"> Add to Cart </a>&nbsp;&nbsp;&nbsp;
+
                                <a asp-controller="Cart" asp-action="details" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-secondary"> View Details</a>
-                               
+
                            </div>
-                           <small class="text-muted">9 mins</small>
+                           <h5 class="text-muted">@item.ProductQty Left</h5>
                        </div>
                    </div>
                 </div>

@@ -10,13 +10,11 @@ using CoreEcommerceUserPanal.Helpers;
 
 namespace CoreEcommerceUserPanal.Controllers
 {
-    [Route("home")]
+    
     public class HomeController : Controller
     {
         ShoppingProjectContext context = new ShoppingProjectContext();
-         [Route("")]
-        [RouteAttribute("index")]
-        [Route("~/")]
+        
          [HttpGet]
         public IActionResult Index()
         {
@@ -61,6 +59,10 @@ namespace CoreEcommerceUserPanal.Controllers
             return View();
         }
         public IActionResult Front()
+        {
+            return View();
+        }
+        public IActionResult About()
         {
             return View();
         }
