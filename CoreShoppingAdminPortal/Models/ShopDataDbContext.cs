@@ -16,10 +16,11 @@ namespace CoreShoppingAdminPortal.Models
         public DbSet<ProductCategory> Categories { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         public ShopDataDbContext(DbContextOptions<ShopDataDbContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // optionsBuilder.UseSqlServer("Data Source=TRD-517; Initial Catalog=ShoppingDemo;Integrated Security=true;");
+            // optionsBuilder.UseSqlServer("Data Source=TRD-519; Initial Catalog=ShoppingDemo;Integrated Security=true;");
            
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

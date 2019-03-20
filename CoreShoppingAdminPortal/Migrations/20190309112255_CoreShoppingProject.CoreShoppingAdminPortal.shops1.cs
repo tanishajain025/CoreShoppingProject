@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CoreShoppingAdminPortal.Migrations
 {
-    public partial class CoreShoppingProjectCoreShoppingAdminPortalShop10 : Migration
+    public partial class CoreShoppingProjectCoreShoppingAdminPortalshops1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,10 +45,16 @@ namespace CoreShoppingAdminPortal.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
                     EmailId = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    Country = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
+                    Zip = table.Column<int>(nullable: false),
                     PhoneNo = table.Column<double>(nullable: false),
-                    Password = table.Column<string>(nullable: true)
+                    Password = table.Column<string>(nullable: true),
+                    Shipping_Address = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,6 +75,27 @@ namespace CoreShoppingAdminPortal.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vendors", x => x.VendorId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OrderPrice = table.Column<float>(nullable: false),
+                    OrderDate = table.Column<DateTime>(nullable: false),
+                    CustomerId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Orders_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,29 +130,24 @@ namespace CoreShoppingAdminPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "OrderProducts",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ProductQty = table.Column<int>(nullable: false),
-                    Units = table.Column<int>(nullable: false),
-                    Billamount = table.Column<float>(nullable: false),
-                    OrderDate = table.Column<DateTime>(nullable: false),
-                    CustomerId = table.Column<int>(nullable: false),
-                    ProductId = table.Column<int>(nullable: false)
+                    OrderId = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.PrimaryKey("PK_OrderProducts", x => new { x.OrderId, x.ProductId });
                     table.ForeignKey(
-                        name: "FK_Orders_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
+                        name: "FK_OrderProducts_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Products_ProductId",
+                        name: "FK_OrderProducts_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId",
@@ -133,14 +155,14 @@ namespace CoreShoppingAdminPortal.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderProducts_ProductId",
+                table: "OrderProducts",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
                 table: "Orders",
                 column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_ProductId",
-                table: "Orders",
-                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductCategoryId",
@@ -159,13 +181,16 @@ namespace CoreShoppingAdminPortal.Migrations
                 name: "Admins");
 
             migrationBuilder.DropTable(
+                name: "OrderProducts");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Categories");

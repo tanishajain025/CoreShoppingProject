@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoreShoppingAdminPortal.Migrations
 {
     [DbContext(typeof(ShopDataDbContext))]
-    [Migration("20190308071052_CoreShoppingProject.CoreShoppingAdminPortal.shops2")]
-    partial class CoreShoppingProjectCoreShoppingAdminPortalshops2
+    [Migration("20190309112255_CoreShoppingProject.CoreShoppingAdminPortal.shops1")]
+    partial class CoreShoppingProjectCoreShoppingAdminPortalshops1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -79,25 +79,32 @@ namespace CoreShoppingAdminPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<float>("Billamount");
-
                     b.Property<int>("CustomerId");
 
                     b.Property<DateTime>("OrderDate");
 
-                    b.Property<int>("ProductId");
-
-                    b.Property<int>("ProductQty");
-
-                    b.Property<int>("Units");
+                    b.Property<float>("OrderPrice");
 
                     b.HasKey("OrderId");
 
                     b.HasIndex("CustomerId");
 
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("CoreShoppingAdminPortal.Models.OrderProduct", b =>
+                {
+                    b.Property<int>("OrderId");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("OrderId", "ProductId");
+
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("OrderProducts");
                 });
 
             modelBuilder.Entity("CoreShoppingAdminPortal.Models.Product", b =>
@@ -169,9 +176,17 @@ namespace CoreShoppingAdminPortal.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CoreShoppingAdminPortal.Models.OrderProduct", b =>
+                {
+                    b.HasOne("CoreShoppingAdminPortal.Models.Order", "Order")
+                        .WithMany("OrderProducts")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CoreShoppingAdminPortal.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("OrderProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

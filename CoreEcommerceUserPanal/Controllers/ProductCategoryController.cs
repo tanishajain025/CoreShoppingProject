@@ -9,7 +9,7 @@ namespace CoreEcommerceUserPanal.Controllers
 {
     public class ProductCategoryController : Controller
     {
-        ShoppingprojectContext context = new ShoppingprojectContext();
+        ShoppingProjectContext context = new ShoppingProjectContext();
         public IActionResult Index()
         {
 
