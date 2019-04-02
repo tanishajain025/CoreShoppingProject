@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
 using CoreEcommerceUserPanal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -44,13 +44,13 @@ namespace CoreEcommerceUserPanal.Controllers
             if (user == null)
             {
                 ViewBag.Error = "Invalid Credentials";
-                return View("Index");
+                return View("Login");
             }
             else
             {
                 var userName = user.UserName;
                 int custId = ViewBag.cust.CustomerId;
-                if(username !=null && password !=null && username.Equals(userName) && password.Equals("12345"))
+                if(username !=null && password !=null && username.Equals(userName) && password.Equals(user.Password))
                 {
                     HttpContext.Session.SetString("uname", username);
                     return RedirectToAction("checkout", "cart", new

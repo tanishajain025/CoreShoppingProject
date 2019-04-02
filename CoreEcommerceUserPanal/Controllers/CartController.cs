@@ -119,9 +119,11 @@ namespace CoreEcommerceUserPanal.Controllers
         [Route("Details/{id}")]
         public IActionResult Details(int id)
         {
-            var det=context.Products.Find(id);
-            ViewBag.Categories = new SelectList(context.Categories,"ProductCategoryId","CategoryName");
-            return View(det);
+
+            var detail = context.Products.Find(id);
+            var cid = context.Products.Find(id);
+            ViewBag.cname = context.Categories.Find(cid.ProductCategoryId);
+            return View(detail);
         }
         public IActionResult Checkout()
         {

@@ -163,8 +163,8 @@
                               <label asp-for="Gender">Gender </label>
                                     <select asp-for="Gender" class="form-control" type="Gender" id="Gender" required>
                                         <option value="@ViewBag.cus.Gender">@ViewBag.cus.Gender</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
+                                        @*<option>Male</option>
+                                        <option>Female</option>*@
                                     </select>
                                 </div>
 
@@ -176,11 +176,11 @@
                                         Please enter a valid email address for shipping updates.
                                     </div>
                                 </div>
-                                <div class="mb-3">
+                                @*<div class="mb-3">
                                     <label asp-for="Password">Password <span class="text-muted"></span></label>
                                     <input asp-for="Password" required type="password" class="form-control" id="password" name="password" value="@ViewBag.cus.Password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
 
-                                </div>
+                                </div>*@
 
                                 <h4 class="mb-3">Billing address</h4>
                                 <div class="mb-3">
@@ -274,7 +274,7 @@
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label asp-for="Zip">Zip</label>
-                                        <input asp-for="Zip" type="number" class="form-control" id="residential_zip" placeholder="Zip" value="@ViewBag.cus.LastName" required>
+                                        <input asp-for="Zip" type="number" class="form-control" id="residential_zip" placeholder="Zip" value="@ViewBag.cus.Zip" required>
                                         <div class="invalid-feedback">
                                             Zip code required.
                                         </div>

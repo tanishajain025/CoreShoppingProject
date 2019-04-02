@@ -25,7 +25,7 @@
         </div>
         <div class="col-12 mb-3">
             <label asp-for="Gender">Gender </label>
-            <select id="Gender" class="form-control">
+            <select asp-for="Gender" id="Gender" class="form-control">
                 <option value="">Selected</option>
                 <option>Male</option>
                 <option>Female</option>
@@ -54,7 +54,8 @@
 
         <div class="col-12 mb-3">
             <label asp-for="Country"><b>Country</b></label>
-            <select id="Country" class="form-control">
+            <select asp-for="Country" id="Country" class="form-control">
+                <option value="">Select Country</option>
                 <option>Afghanistan</option>
                 <option>Bhutan</option>
                 <option>Bolivia</option>
@@ -82,7 +83,7 @@
 
         <div class="col-12 mb-3">
             <label asp-for="State"><b>State</b></label>
-            <select id="State" class="form-control">
+            <select asp-for="State" id="State" class="form-control">
                 <option value="">Select State</option>
                 <option>Andaman and Nicobar Islands</option>
                 <option>Andhra Pradesh</option>
