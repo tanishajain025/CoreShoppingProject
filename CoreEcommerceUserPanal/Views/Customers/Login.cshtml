@@ -1,7 +1,7 @@
 ﻿@model CoreEcommerceUserPanal.Models.Customers
 @{
     ViewData["Title"] = "Login";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    Layout = null;
 }
 <html>
 <head>
@@ -19,7 +19,7 @@
 <body class="text-center">
     <p>@ViewBag.Error</p>
     <form class="form-signin" method="post" asp-controller="Customers" asp-action="Login">
-        <img class="mb-4" src="~/images/logo.jpg" alt="" width="72" height="72">
+        <img class="mb-4" src="~/images/shopping-mania.jpg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 
         <div class="col-12 mb-3">
