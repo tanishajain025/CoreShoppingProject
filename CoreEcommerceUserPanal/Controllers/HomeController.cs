@@ -39,21 +39,21 @@ namespace CoreEcommerceUserPanal.Controllers
             }
             return View(product);
         }
-        [Route("Login")]
-        [HttpPost]
-        public IActionResult Login(string username, string password)
-        {
-            if (username != null && password != null && username.Equals("user") && password.Equals("123456"))
-            {
-                HttpContext.Session.SetString("uname", username);
-                return View("Home");
-            }
-            else
-            {
-                ViewBag.Error = "Invalid Credentials";
-                return View("Index");
-            }
-        }
+        //[Route("Login")]
+        //[HttpPost]
+        //public IActionResult Login(string username, string password)
+        //{
+        //    if (username != null && password != null && username.Equals("user") && password.Equals("123456"))
+        //    {
+        //        HttpContext.Session.SetString("uname", username);
+        //        return View("Home");
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Error = "Invalid Credentials";
+        //        return View("Index");
+        //    }
+        //}
         public IActionResult Display()
         {
             return View();
@@ -68,7 +68,10 @@ namespace CoreEcommerceUserPanal.Controllers
         //    return View();
         //}
         //[HttpPost]
-        //[ValidateAntiForgeryToken]
+        //public IActionResult ChangePassword()
+        //{
+        //    return View();
+        //}
         //public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         //{
         //    if (!ModelState.IsValid)
@@ -88,5 +91,9 @@ namespace CoreEcommerceUserPanal.Controllers
         //    AddErrors(result);
         //    return View(model);
         //}
+        public IActionResult HomePage()
+        {
+            return View();
+        }
     }
 }
