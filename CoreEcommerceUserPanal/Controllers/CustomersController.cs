@@ -25,7 +25,7 @@ namespace CoreEcommerceUserPanal.Controllers
         {
             context.Customers.Add(cust);
             context.SaveChanges();
-
+            HttpContext.Session.SetString("logout", cust.UserName);
             return RedirectToAction("Login");
         }
         public IActionResult Login()
@@ -54,6 +54,7 @@ namespace CoreEcommerceUserPanal.Controllers
                 {
                     HttpContext.Session.SetString("uname", username);
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "cust", user);
+                    HttpContext.Session.SetString("logout", userName);
                     return RedirectToAction("Index", "Home", new
                     {
                         @id = custId
@@ -72,7 +73,8 @@ namespace CoreEcommerceUserPanal.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("uname");
-            return RedirectToAction("HomePage", "Home");
+            HttpContext.Session.Remove("logout");
+            return RedirectToAction("Index", "Home");
         }
         public IActionResult custEdit()
         {
@@ -124,5 +126,29 @@ namespace CoreEcommerceUserPanal.Controllers
             ViewBag.p = products;
             return View();
         }
+        public IActionResult password()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult password(string oldpassword, string newpassword, string newpassword1)
+        {
+
+            Customers c = SessionHelper.GetObjectFromJson<Customers>(HttpContext.Session, "cust");
+            if (oldpassword == c.Password && newpassword == newpassword1)
+            {
+                Customers cus = context.Customers.Where(x => x.UserName == c.UserName).SingleOrDefault();
+                cus.Password = newpassword;
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cust", cus);
+                context.SaveChanges();
+            }
+            else
+            {
+                ViewBag.Error = "Invalid Credentials";
+                return View("password");
+            }
+            return RedirectToAction("Login","Customers");
+        }
+
     }
 }
