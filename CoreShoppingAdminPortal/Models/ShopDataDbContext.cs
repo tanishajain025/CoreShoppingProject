@@ -16,6 +16,7 @@ namespace CoreShoppingAdminPortal.Models
         public DbSet<ProductCategory> Categories { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
         //public DbSet<Brand> Brands { get; set; }
         public ShopDataDbContext(DbContextOptions<ShopDataDbContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -31,6 +32,21 @@ namespace CoreShoppingAdminPortal.Models
             }
 
             );
+            modelBuilder.Entity<Vendor>(entity =>
+            {
+                entity.Property(e => e.VendorName)
+                .HasColumnName("VendorName")
+                .HasMaxLength(15)
+                .IsUnicode(false);
+            });
+            modelBuilder.Entity<ProductCategory>(entity =>
+            {
+                entity.Property(e => e.CategoryName)
+                .HasColumnName("CategoryName")
+                .HasMaxLength(15)
+                .IsUnicode(false);
+            });
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

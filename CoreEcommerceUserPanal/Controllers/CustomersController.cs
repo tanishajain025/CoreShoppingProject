@@ -5,6 +5,7 @@ using CoreEcommerceUserPanal.Helpers;
 using CoreEcommerceUserPanal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CoreEcommerceUserPanal.Controllers
 {
@@ -148,6 +149,20 @@ namespace CoreEcommerceUserPanal.Controllers
                 return View("password");
             }
             return RedirectToAction("Login","Customers");
+        }
+        [HttpGet]
+        public ViewResult Feedback()
+        {
+            ViewBag.Feed = new SelectList(context.Customers, "CustomerId", "EmailId");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Feedback(Feedbacks fed)
+        {
+            context.Feedbacks.Add(fed);
+            context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
         }
 
     }

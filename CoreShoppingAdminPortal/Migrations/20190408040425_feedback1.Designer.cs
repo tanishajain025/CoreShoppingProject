@@ -4,14 +4,16 @@ using CoreShoppingAdminPortal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CoreShoppingAdminPortal.Migrations
 {
     [DbContext(typeof(ShopDataDbContext))]
-    partial class ShopDataDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190408040425_feedback1")]
+    partial class feedback1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,10 +184,7 @@ namespace CoreShoppingAdminPortal.Migrations
 
                     b.Property<string>("VendorDescription");
 
-                    b.Property<string>("VendorName")
-                        .HasColumnName("VendorName")
-                        .HasMaxLength(15)
-                        .IsUnicode(false);
+                    b.Property<string>("VendorName");
 
                     b.HasKey("VendorId");
 
