@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using CoreEcommerceUserPanal.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Stripe;
+using CoreEcommerceUserPanal.Models;
 
 namespace CoreEcommerceUserPanal
 {
@@ -27,6 +29,7 @@ namespace CoreEcommerceUserPanal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -57,6 +60,7 @@ namespace CoreEcommerceUserPanal
                 app.UseHsts();
             }
 
+            StripeConfiguration.SetApiKey(Configuration.GetSection("Stripe")["SecretKey"]);
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

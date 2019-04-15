@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using CoreEcommerceUserPanal.Models;
 using Microsoft.AspNetCore.Http;
 using CoreEcommerceUserPanal.Helpers;
+using Stripe;
 
 namespace CoreEcommerceUserPanal.Controllers
 {
@@ -54,5 +55,7 @@ namespace CoreEcommerceUserPanal.Controllers
         {
             return View();
         }
+
+        
     }
 }

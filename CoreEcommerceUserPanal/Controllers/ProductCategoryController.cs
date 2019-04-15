@@ -22,13 +22,13 @@ namespace CoreEcommerceUserPanal.Controllers
             var pc = _context.Categories.ToList();
             return View(pc);
         }
-        [HttpGet("{id}")]
+        //[HttpGet("{id}")]
         public async Task<IActionResult> ProductDisplay(int? id)
         {
             var p = _context.Products.Where(x => x.ProductCategoryId == id).ToList();
             return View(p);
         }
-        [HttpGet("{id}")]
+        //[HttpGet("{id}")]
         public async Task<IActionResult> Get(int? id)
         {
             if (id == null)
