@@ -201,7 +201,7 @@ namespace CoreEcommerceUserPanal.Controllers
             var charges = new ChargeService();
             var amount = TempData["total"];
             var order = TempData["orderId"];
-            var customer2 = TempData["customerId"];
+            var custt = TempData["cust"];
             var customer = customers.Create(new CustomerCreateOptions
             {
                 Email = stripeEmail,
@@ -223,7 +223,7 @@ namespace CoreEcommerceUserPanal.Controllers
                 payment.Paymentdate = System.DateTime.Now;
                 payment.Cardno = Convert.ToInt32(charge.PaymentMethodDetails.Card.Last4);
                 payment.OrderId = Convert.ToInt32(order);
-                payment.CustomerId = Convert.ToInt32(customer2);
+                payment.CustomerId = Convert.ToInt32(custt);
             }
             //var customerService = new CustomerService();
             //ViewBag.details = charge.PaymentMethodDetails.Card.Last4;
@@ -252,8 +252,6 @@ namespace CoreEcommerceUserPanal.Controllers
         }
 
      
-
-
         [Route("Invoice")]
         public IActionResult Invoice()
         {
@@ -263,6 +261,7 @@ namespace CoreEcommerceUserPanal.Controllers
 
             var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
+           // ViewBag.paymentId = int.Parse(TempData["paymentId"].ToString());
             foreach(var Item in cart)
             {
                 Products p = context.Products.Find(Item.Products.ProductId);
