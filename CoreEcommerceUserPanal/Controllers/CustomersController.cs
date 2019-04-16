@@ -64,7 +64,7 @@ namespace CoreEcommerceUserPanal.Controllers
                 else
                 {
                     ViewBag.Error = "Invalid credentials";
-                    return View("Index");
+                    return View("Login");
                 }
             }
            
@@ -104,7 +104,7 @@ namespace CoreEcommerceUserPanal.Controllers
                 else
                 {
                     ViewBag.Error = "Invalid credentials";
-                    return View("Index");
+                    return View("Login1");
                 }
             }
 

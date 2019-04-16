@@ -1,9 +1,9 @@
-﻿@using Microsoft.Extensions.Options
+﻿@*@using Microsoft.Extensions.Options
 @inject IOptions<StripeSettings> Stripe
 
-<form action="/Payment/Charge" method="POST">
+<form action="/cart/Invoice" method="POST">
     <article>
-        <label>Amount: $5.00</label>
+        <label>Total:@ViewBag.total</label>
     </article>
     <script src="//checkout.stripe.com/v2/checkout.js"
             class="stripe-button"
@@ -12,4 +12,4 @@
             data-description="Sample Charge"
             data-amount="500">
     </script>
-</form>
+</form>*@

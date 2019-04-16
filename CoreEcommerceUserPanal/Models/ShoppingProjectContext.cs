@@ -22,6 +22,7 @@ namespace CoreEcommerceUserPanal.Models
         public virtual DbSet<Feedbacks> Feedbacks { get; set; }
         public virtual DbSet<OrderProducts> OrderProducts { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Payments> Payments { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Vendors> Vendors { get; set; }
 
@@ -97,6 +98,17 @@ namespace CoreEcommerceUserPanal.Models
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomerId);
+            });
+
+            modelBuilder.Entity<Payments>(entity =>
+            {
+                entity.HasKey(e => e.PaymentId);
+
+                entity.HasIndex(e => e.OrderId);
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.Payments)
+                    .HasForeignKey(d => d.OrderId);
             });
 
             modelBuilder.Entity<Products>(entity =>

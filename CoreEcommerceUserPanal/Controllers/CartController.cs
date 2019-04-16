@@ -7,6 +7,7 @@ using CoreEcommerceUserPanal.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Stripe;
 
 namespace CoreEcommerceUserPanal.Controllers
 {
@@ -32,6 +33,14 @@ namespace CoreEcommerceUserPanal.Controllers
                 {
                     ViewBag.cart = cart;
                     ViewBag.total = cart.Sum(item => item.Products.ProductPrice * item.Quantity);
+                    if (SessionHelper.GetObjectFromJson<Customers>(HttpContext.Session, "cust") == null)
+                    {
+                        ViewBag.i = 0;
+                    }
+                    else
+                    {
+                        ViewBag.i = 1;
+                    }
                     return View();
                 }
 
@@ -125,6 +134,8 @@ namespace CoreEcommerceUserPanal.Controllers
             ViewBag.cname = context.Categories.Find(cid.ProductCategoryId);
             return View(detail);
         }
+        [Route("checkout")]
+        [HttpGet]
         public IActionResult Checkout()
         {
             int i = 0;
@@ -139,32 +150,35 @@ namespace CoreEcommerceUserPanal.Controllers
             TempData["total"] = ViewBag.total;
             return View();
         }
+        [Route ("checkout")]
         [HttpPost]
-        public IActionResult Checkout(Customers customer)
+        public IActionResult Checkout(Customers customer1, string stripeEmail, string stripeToken)
         {
             
-         var c = context.Customers.Where(x => x.UserName == customer.UserName).SingleOrDefault();
-            c.FirstName = customer.FirstName;
-            c.LastName = customer.LastName;
-            c.UserName = customer.UserName;
-            c.EmailId = customer.EmailId;
-            c.Address = customer.Address;
-            c.PhoneNo = customer.PhoneNo;
-            c.Country = customer.Country;
-            c.State = customer.State;
-            c.Zip = customer.Zip;
+         var c = context.Customers.Where(x => x.UserName == customer1.UserName).SingleOrDefault();
+            c.FirstName = customer1.FirstName;
+            c.LastName = customer1.LastName;
+            c.UserName = customer1.UserName;
+            c.EmailId = customer1.EmailId;
+            c.Address = customer1.Address;
+            c.PhoneNo = customer1.PhoneNo;
+            c.Country = customer1.Country;
+            c.State = customer1.State;
+            c.Zip = customer1.Zip;
             context.SaveChanges();
-                var amount = (TempData["total"]);
+                var amount1 = (TempData["total"]);
                 Orders orders = new Orders()
                 {
-                    OrderPrice = Convert.ToSingle(amount),
+                    OrderPrice = Convert.ToSingle(amount1),
                     OrderDate = DateTime.Now,
                     CustomerId = c.CustomerId
 
                 };
                 context.Orders.Add(orders);
+                
                 context.SaveChanges();
-                var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            TempData["orderId"] = orders.OrderId;
+            var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
                 List<OrderProducts> OrderProducts = new List<OrderProducts>();
 
                 for (int i = 0; i < cart.Count; i++)
@@ -180,10 +194,66 @@ namespace CoreEcommerceUserPanal.Controllers
                 OrderProducts.ForEach(n => context.OrderProducts.Add(n));
                 context.SaveChanges();
                 TempData["cust"] = c.CustomerId;
-                return RedirectToAction("Invoice");
-            //}
-            //return View();
+
+
+
+            var customers = new CustomerService();
+            var charges = new ChargeService();
+            var amount = TempData["total"];
+            var order = TempData["orderId"];
+            var customer2 = TempData["customerId"];
+            var customer = customers.Create(new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                SourceToken = stripeToken
+            });
+
+            var charge = charges.Create(new ChargeCreateOptions
+            {
+                Amount = 55,
+                Description = "Sample Charge",
+                Currency = "usd",
+                CustomerId = customer.Id
+            });
+
+            Payments payment = new Payments();
+            {
+                payment.PaymentStripeId = charge.PaymentMethodId;
+                payment.Amount = Convert.ToInt32(amount);
+                payment.Paymentdate = System.DateTime.Now;
+                payment.Cardno = Convert.ToInt32(charge.PaymentMethodDetails.Card.Last4);
+                payment.OrderId = Convert.ToInt32(order);
+                payment.CustomerId = Convert.ToInt32(customer2);
+            }
+            //var customerService = new CustomerService();
+            //ViewBag.details = charge.PaymentMethodDetails.Card.Last4;
+            context.Add<Payments>(payment);
+            context.Payments.Add(payment);
+            context.SaveChanges();
+
+            return RedirectToAction("Invoice", "Cart");
+              
         }
+
+
+
+        public IActionResult PaymentIndex()
+        {
+            var checkout = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            ViewBag.checkout = checkout;
+            ViewBag.total = checkout.Sum(item => item.Products.ProductPrice * item.Quantity);
+
+            return View();
+        }
+
+        public IActionResult Error()
+        {
+            return View();
+        }
+
+     
+
+
         [Route("Invoice")]
         public IActionResult Invoice()
         {
