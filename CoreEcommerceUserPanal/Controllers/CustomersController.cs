@@ -182,26 +182,45 @@ namespace CoreEcommerceUserPanal.Controllers
                 cus.Password = newpassword;
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cust", cus);
                 context.SaveChanges();
+                return RedirectToAction("Details");
+            }
+            else if (oldpassword != c.Password && newpassword == newpassword1)
+            {
+
+                ViewBag.Error = "Invalid Old Password";
+                return View("password");
+            }
+            else if (oldpassword == c.Password && newpassword != newpassword1)
+            {
+
+                ViewBag.Error = "New Password and Confirm Password must be same ";
+                return View("password");
             }
             else
             {
-                ViewBag.Error = "Invalid Credentials";
+                ViewBag.Error = "Invalid Credential ";
                 return View("password");
             }
-            return RedirectToAction("Login","Customers");
         }
+
+
         [HttpGet]
-        public ViewResult Feedback()
+        public IActionResult Feedback()
         {
-            ViewBag.Feed = new SelectList(context.Customers, "CustomerId", "EmailId");
-            return View();
+            Feedbacks cus1 = SessionHelper.GetObjectFromJson<Feedbacks>(HttpContext.Session, "cust");
+            Customers c = SessionHelper.GetObjectFromJson<Customers>(HttpContext.Session, "cust");
+            ViewBag.cusname = c.UserName;
+            return View(cus1);
         }
         [HttpPost]
-        public ActionResult Feedback(Feedbacks fed)
+        public IActionResult Feedback(Feedbacks fed)
         {
+
+            Customers c = SessionHelper.GetObjectFromJson<Customers>(HttpContext.Session, "cust");
+
+            fed.CustomerId = c.CustomerId;
             context.Feedbacks.Add(fed);
             context.SaveChanges();
-
             return RedirectToAction("Index", "Home");
         }
 

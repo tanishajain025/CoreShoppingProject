@@ -4,8 +4,67 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
+<style>
+    .tb {
+        margin-left: 100px;
+    }
+
+    body {
+        font-family: "Lato", sans-serif;
+    }
+
+    .sidenav {
+        width: 160px;
+        position: fixed;
+        z-index: 1;
+        top: 20px;
+        left: -10px;
+        background: black;
+        overflow-x: hidden;
+        padding: 8px 0;
+        height: 700px;
+    }
+
+        .sidenav a {
+            padding: 50px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+        }
+
+            .sidenav a:hover {
+                color: #064579;
+            }
+
+    .main {
+        margin-left: 140px; /* Same width as the sidebar + left position in px */
+        font-size: 28px; /* Increased text to enable scrolling */
+        padding: 0px 10px;
+    }
+
+    media screen and (max-height: 450px) {
+        .sidenav
+
+    {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+    }
+</style>
+
+<div class="sidenav">
+    <a class="nav-link" asp-controller="customers" asp-action="Details">My Profile</a>
+    <a class="nav-link" asp-controller="customers" asp-action="OrderHistory">My Orders</a>
+    <a class="nav-link" asp-controller="customers" asp-action="custEdit">Edit Profile</a>
+    <a class="nav-link" asp-controller="customers" asp-action="password">Reset Password</a>
+    <a class="nav-link" asp-controller="customers" asp-action="Feedback">Feedback</a>
+</div>
 <h2>Edit</h2>
-&nbsp;&nbsp;
+                &nbsp;&nbsp;
 <form asp-action="custEdit" asp-controller="Customers">
     <div class="form-group row">
         <input type="hidden" asp-for="CustomerId" />
@@ -14,45 +73,46 @@
         <div class="col-sm-10">
             <input class="form-control" asp-for="FirstName" />
         </div>
-        <br />
+        <br /><br />
         <label for="text" class="col-sm-2 col-form-label" asp-for="LastName">LastName</label>
         <div class="col-sm-10">
             <input class="form-control" asp-for="LastName" />
         </div>
-
+        <br />
         <br />
         <label for="text" class="col-sm-2 col-form-label" asp-for="UserName">UserName</label>
         <div class="col-sm-10">
             <input class="form-control" asp-for="UserName" />
         </div>
-
+        <br />
         <br />
 
         <label for="text" class="col-sm-2 col-form-label" asp-for="EmailId">Email Id</label>
         <div class="col-sm-10">
             <input class="form-control" asp-for="EmailId" />
         </div>
-
+        <br /><br />
         <label for="text" class="col-sm-2 col-form-label" asp-for="Gender">Gender</label>
         <div class="col-sm-10">
             <input class="form-control" asp-for="Gender" />
         </div>
-        <br />
+        <br /><br />
         <label for="text" class="col-sm-2 col-form-label" asp-for="Address">Address</label>
         <div class="col-sm-10">
             <input class="form-control" asp-for="Address" />
         </div>
-        <br />
+        <br /><br />
         <label for="text" class="col-sm-2 col-form-label" asp-for="Country">Country</label>
         <div class="col-sm-10">
             <input class="form-control" asp-for="Country" />
-            </div>
         </div>
-            <center>
-                <input type="submit" value="Edit" class="btn btn-success" />&nbsp;
-                <button class="btn btn-success" asp-controller="Home" asp-action="About">
+    </div><br />
+    <center>
+        <input type="submit" value="Edit" class="btn btn-success" />&nbsp;
+        <button class="btn btn-success" asp-controller="Home" asp-action="About">
 
-                    Back
-                </button>
-            </center>
+            Back
+        </button>
+    </center>
 </form>
+    

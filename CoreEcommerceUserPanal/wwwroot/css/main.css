@@ -33,7 +33,7 @@
 * {
 	margin: 0px; 
 	padding: 0px; 
-	box-sizing: border-box;
+	
 }
 
 body, html {
@@ -133,16 +133,16 @@ iframe {
   min-height: 100%;
   padding: 15px;
 
-  background: #009bff;
-  background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
-  background: -o-linear-gradient(left, #0072ff, #00c6ff);
+  
+  /*background: -webkit-linear-gradient(left, #0072ff, #00c6ff);*/
+  /*background: -o-linear-gradient(left, #0072ff, #00c6ff);
   background: -moz-linear-gradient(left, #0072ff, #00c6ff);
-  background: linear-gradient(left, #0072ff, #00c6ff);
+  background: linear-gradient(left, #0072ff, #00c6ff);*/
 
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
+  /*display: -webkit-box;
+  display: -webkit-flex;*/
+  /*display: -moz-box;
+  display: -ms-flexbox;*/
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -155,10 +155,10 @@ iframe {
   border-radius: 10px;
   overflow: hidden;
 
-  display: -webkit-box;
+  /*display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
-  display: -ms-flexbox;
+  display: -ms-flexbox;*/
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -188,7 +188,7 @@ iframe {
   display: block;
   font-family: Montserrat-ExtraBold;
   font-size: 24px;
-  color: #333333;
+  /*color: #333333;*/
   line-height: 1.2;
   text-align: center;
   padding-bottom: 44px;
@@ -384,7 +384,7 @@ textarea.input1 + .shadow-input1 {
   border: 1px solid #c80000;
   border-radius: 13px;
   padding: 4px 25px 4px 10px;
-  top: 50%;
+  top: 100%;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -415,7 +415,7 @@ textarea.input1 + .shadow-input1 {
   position: absolute;
   color: #c80000;
   font-size: 15px;
-  top: 50%;
+  top: 100%;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);

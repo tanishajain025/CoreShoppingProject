@@ -50,6 +50,11 @@ namespace CoreEcommerceUserPanal.Controllers
         [Route("buy /{id}")]
         public IActionResult Buy(int id)
         {
+            Products p = context.Products.Find(id);
+            if(p.ProductQty <1)
+            {
+                return RedirectToAction("OutofStock", "cart", new { @id = id });
+            }
             if(SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session,"cart") == null)
             {
                 List<Item> cart = new List<Item>();
@@ -78,6 +83,15 @@ namespace CoreEcommerceUserPanal.Controllers
             }
             return RedirectToAction("Index","Home");
 
+        }
+        [Route("OutofStock/{id}")]
+        public IActionResult OutofStock(int id)
+        {
+            var detail = context.Products.Find(id);
+            var cid = context.Products.Find(id);
+            ViewBag.cname = context.Categories.Find(cid.ProductCategoryId);
+            return View(detail);
+            
         }
         [Route("Remove/{id}")]
         
@@ -227,6 +241,7 @@ namespace CoreEcommerceUserPanal.Controllers
             }
             //var customerService = new CustomerService();
             //ViewBag.details = charge.PaymentMethodDetails.Card.Last4;
+            ViewBag.details = charge.PaymentMethodDetails.Card.GetType();
             context.Add<Payments>(payment);
             context.Payments.Add(payment);
             context.SaveChanges();
@@ -316,7 +331,42 @@ namespace CoreEcommerceUserPanal.Controllers
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             return RedirectToAction("Index");
         }
-       
 
+        [Route("Search")]
+        [HttpPost]
+        public IActionResult Search(string search)
+        {
+            List<Products> prod = new List<Products>();
+            var product = context.Products.Where(x => x.ProductName == search).ToList();
+            if (context.Brands.Where(x => x.BrandName == search).SingleOrDefault() != null)
+            {
+                Brands b = context.Brands.Where(x => x.BrandName == search).SingleOrDefault();
+                var brand = context.Products.Where(x => x.BrandId == b.BrandId).ToList();
+                foreach (var item in brand)
+                {
+                    prod.Add(item);
+
+                }
+            }
+            if (context.Categories.Where(x => x.CategoryName == search).SingleOrDefault() != null)
+            {
+                Categories c = context.Categories.Where(x => x.CategoryName == search).SingleOrDefault();
+                var category = context.Products.Where(x => x.ProductCategoryId == c.ProductCategoryId).ToList();
+                foreach (var item in category)
+                {
+                    prod.Add(item);
+
+                }
+            }
+
+            foreach (var item in product)
+            {
+                prod.Add(item);
+
+            }
+
+
+            return View(prod);
+        }
     }
 }

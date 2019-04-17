@@ -3,51 +3,73 @@
     ViewData["Title"] = "Feedback";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
+<style>
+    .tp {
+        margin-top: 100px;
+    }
 
-@* <form asp-action="Feedback" asp-controller="Customers">
+    body {
+        font-family: "Lato", sans-serif;
+    }
 
+    .sidenav {
+        width: 160px;
+        position: fixed;
+        z-index: 1;
+        top: 20px;
+        left: -10px;
+        background: black;
+        overflow-x: hidden;
+        padding: 8px 0;
+        height: 700px;
+    }
 
+        .sidenav a {
+            padding: 50px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+        }
 
-        <label asp-for="EmailId" class="col-sm-2 col-form-label">Email Id</label>
-        <input asp-for="EmailId" type="email" id="email" placeholder="Your Email Id ..">
+            .sidenav a:hover {
+                color: #064579;
+            }
 
-        <label asp-for="PhoneNo" class="col-sm-2 col-form-label">Phone No</label>
-        <input asp-for="PhoneNo" type="number" id="phone" placeholder="Your Phone No ..">
+    .main {
+        margin-left: 140px; /* Same width as the sidebar + left position in px */
+        font-size: 28px; /* Increased text to enable scrolling */
+        padding: 0px 10px;
+    }
 
+    media screen and (max-height: 450px) {
+        .sidenav
 
-        <label asp-for="Comment" class="col-sm-2 col-form-label">Comment</label>
-        <textarea asp-for="Comment" id="comment" placeholder="Write something.." style="height:200px"></textarea>
+    {
+        padding-top: 15px;
+    }
 
-        <label for="text" class="col-sm-2 col-form-label" asp-for="CustomerId">Customer Id</label>
-        <div class="col-sm-10">
-            <select class="form-control" asp-for="CustomerId" asp-items="ViewBag.feed"></select>
-        </div>  <br />
+    .sidenav a {
+        font-size: 18px;
+    }
+    }
+</style>
 
-        <input type="submit" value="Submit">
-
-    </form>*@
-
-
-
-@*<!DOCTYPE html>
-    <html lang="en">*@
+<div class="sidenav">
+    <a class="nav-link" asp-controller="customers" asp-action="Details">My Profile</a>
+    <a class="nav-link" asp-controller="customers" asp-action="OrderHistory">My Orders</a>
+    <a class="nav-link" asp-controller="customers" asp-action="custEdit">Edit Profile</a>
+    <a class="nav-link" asp-controller="customers" asp-action="password">Reset Password</a>
+    <a class="nav-link" asp-controller="customers" asp-action="Feedback">Feedback</a>
+</div>
 <head>
-    <title>Contact V1</title>
+
+    <title>Feedback</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
     <!--===============================================================================================-->
-    @*<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-        <!--===============================================================================================-->*@
     <link rel="stylesheet" type="text/css" href="~/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/css/main.css">
     <!--===============================================================================================-->
@@ -56,44 +78,46 @@
 
     <div class="contact1">
         <div class="container-contact1">
-            <div class="contact1-pic js-tilt" data-tilt>
-                <img src="~/images/img-01.png" alt="IMG">
-            </div>
+            @*<div class="contact1-pic js-tilt" data-tilt>
+                    <img src="~/images/img-01.png" alt="IMG">
+                </div>*@
 
             <form class="contact1-form validate-form" asp-action="Feedback" asp-controller="Customers">
                 <span class="contact1-form-title">
-                    Get in touch
+                    Give Feedback
                 </span>
+                <div class="wrap-input1 validate-input" data-validate="Phone No is required">
+                    <label>Username</label>
+                    <input class="input1" asp-items="ViewBag.feed" value="@ViewBag.cusname" required>
+                    <span class="shadow-input1"></span>
+                </div>
 
                 <div class="wrap-input1 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                    <label asp-for="EmailId">EmailId</label>
-                    <input class="input1" asp-for="EmailId" type="email" id="email" placeholder="Email">
+                    <label asp-for="EmailId">Email Id</label>
+                    <input class="input1" asp-for="EmailId" type="email" id="email" placeholder="Email" required>
                     <span class="shadow-input1"></span>
                 </div>
 
 
                 <div class="wrap-input1 validate-input" data-validate="Phone No is required">
                     <label asp-for="PhoneNo">Phone No</label>
-                    <input class="input1" asp-for="PhoneNo" type="number" id="phone" placeholder="Phone">
+                    <input class="input1" asp-for="PhoneNo" type="text" id="phone" placeholder="Phone" required>
                     <span class="shadow-input1"></span>
                 </div>
 
                 <div class="wrap-input1 validate-input" data-validate="Message is required">
-                    <label asp-for="Comment">Comment</label>
-                    <textarea class="input1" asp-for="Comment" id="comment" placeholder="Message"></textarea>
+                    <label asp-for="Comment">Message</label>
+                    <textarea class="input1" asp-for="Comment" id="comment" placeholder="Message" required></textarea>
                     <span class="shadow-input1"></span>
                 </div>
 
-                <div class="wrap-input1 validate-input" data-validate="Phone No is required">
-                    <label asp-for="CustomerId">Customer Id</label>
-                    <input class="input1" asp-for="CustomerId" asp-items="ViewBag.feed" placeholder="Customer ID">
-                    <span class="shadow-input1"></span>
-                </div>
+
 
                 <div class="container-contact1-form-btn">
-                    <button class="contact1-form-btn">
+                    <button class="contact1-form-btn" onclick="myFunction()">
+                        Send FeedBack
                         <span>
-                            Send FeedBack
+
                             <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                         </span>
                     </button>
@@ -103,17 +127,14 @@
     </div>
 
 
+    <script>
+        function myFunction() {
+            alert("Feedback Successfully Submitted !!!");
+        }
+    </script>
 
 
-    <!--===============================================================================================-->
-    @*<script src="vendor/jquery/jquery-3.2.1.min.js"></script>*@
-    @*<!--===============================================================================================-->
-        <script src="vendor/bootstrap/js/popper.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/select2/select2.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/tilt/tilt.jquery.min.js"></script>*@
+
     <script>
         $('.js-tilt').tilt({
             scale: 1.1
@@ -131,7 +152,6 @@
     </script>
 
     <!--===============================================================================================-->
-    <script src="~/js/main1.js"></script>
+    <script src="~/js/main.js"></script>
 
 </body>
-@*</html>*@

@@ -7,7 +7,7 @@
 <h2>Products</h2>
 
 <table class="table">
-    <thead>
+ 
         <tr>
             <th>Product Id</th>
             <th>Product Name</th>
@@ -21,12 +21,12 @@
                 <th>@item.ProductName</th>
              
                 <td>
-                    <a asp-controller="cart" asp-action="Details" class="btn btn-info"
+                    <a asp-controller="cart" asp-action="Details" class="btn btn-dark"
                        asp-route-id="@item.ProductId">Product Details</a>
                 </td>
             </tr>
         }
-    </thead>
+  
 </table>
 <a asp-controller="Home" asp-action="Index" class="btn btn-info">Back to List</a>
 

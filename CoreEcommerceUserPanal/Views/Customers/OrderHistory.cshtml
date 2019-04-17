@@ -4,10 +4,60 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
+<style>
+    .tb{
+        margin-left:100px;
+    }
+body {
+  font-family: "Lato", sans-serif;
+}
 
+.sidenav {
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  left: -10px;
+  background: black;
+  overflow-x: hidden;
+  padding: 8px 0;
+  height:700px;
+}
+
+.sidenav a {
+  padding: 50px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #064579;
+}
+
+.main {
+  margin-left: 140px; /* Same width as the sidebar + left position in px */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+
+<div class="sidenav">
+    <a class="nav-link" asp-controller="customers" asp-action="Details">My Profile</a>
+    <a class="nav-link" asp-controller="customers" asp-action="OrderHistory">My Orders</a>
+    <a class="nav-link" asp-controller="customers" asp-action="custEdit">Edit Profile</a>
+    <a class="nav-link" asp-controller="customers" asp-action="password">Reset Password</a>
+    <a class="nav-link" asp-controller="customers" asp-action="Feedback">Feedback</a>
+</div>
 <h2>OrderHistory</h2>
-<table class="table">
-    <thead >
+<table class="table tb">
+    
         <tr>
             <th>OrderId</th>
             <th>OrderDate</th>
@@ -21,12 +71,14 @@
                 <th>@item.OrderDate</th>
                 <th>@item.OrderPrice</th>
                 <td>
-                    <a asp-controller="Customers" asp-action="OrderDetail" class="btn btn-info"
+                    <a asp-controller="Customers" asp-action="OrderDetail" class="btn btn-dark"
                        asp-route-id="@item.OrderId">Products</a>
                 </td>
+
             </tr>
+           
         }
-    </thead>
+ 
 </table>
-<a asp-controller="Home" asp-action="Index" class="btn btn-info">Back to List</a>
+@*<a asp-controller="Home" asp-action="Index" class="btn btn-info">Back to List</a>*@
 
