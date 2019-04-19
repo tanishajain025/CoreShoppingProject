@@ -4,10 +4,20 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Register</h1>
 
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
 <!--================Checkout Area =================-->
 
-<br/><br/><br/>
 
 <section class="checkout_area section_gap">
     <div class="container">
@@ -15,8 +25,8 @@
             <div class="row">
                 <div class="col-lg-2">&nbsp;</div>
                 <div class="col-lg-8">
-                    <h3>Customer Registration</h3>
-                    <form class="row contact_form" novalidate="novalidate" asp-action="Register" asp-controller="Customers">
+                  
+                    <form class="row contact_form"  asp-action="Register" asp-controller="Customers">
                         <div class="col-md-6 form-group p_star">
                             <input type="text" class="form-control" id="first" asp-for="FirstName" placeholder="Enter First Name" required>
 
@@ -37,7 +47,7 @@
 
                         </div>
                         <div class="col-md-12 form-group p_star">
-                            <select asp-for="Gender" id="Gender"  class="country_select" required>
+                            <select asp-for="Gender" id="Gender" class="country_select" required>
                                 <option value="">Select Gender</option>
                                 <option>Male</option>
                                 <option>Female</option>
@@ -138,10 +148,10 @@
                         </div>
 
 
-                        <button type="submit" class="primary-btn" >Submit</button>
+                        <button type="submit" class="primary-btn">Submit</button>
                     </form>
                 </div>
-            
+
             </div>
         </div>
     </div>

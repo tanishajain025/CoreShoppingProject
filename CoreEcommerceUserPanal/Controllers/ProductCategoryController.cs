@@ -10,6 +10,8 @@ namespace CoreEcommerceUserPanal.Controllers
     public class ProductCategoryController : Controller
     {
         ShoppingProjectContext context = new ShoppingProjectContext();
+
+
         //private readonly ShoppingProjectContext _context;
 
         //public ProductCategoryController(ShoppingProjectContext context)

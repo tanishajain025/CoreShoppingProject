@@ -1,8 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Invoice";
-    Layout = null;
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
+
+<br />
+<br /><br /><br />
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Invoice</h1>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="~/css/Template.css" rel="stylesheet" />
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
@@ -12,7 +27,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="invoice-title">
-                <h2>Invoice</h2>
+             
 
                 <h3 class="pull-right">Order # 12345</h3>
             </div>
@@ -43,10 +58,10 @@
             <div class="row">
                 <div class="col-xs-6">
                     @*<address>
-                        <strong>Payment Method:</strong><br>
-                        Visa ending **** 4242<br>
-                        jsmith@email.com
-                    </address>*@
+                            <strong>Payment Method:</strong><br>
+                            Visa ending **** 4242<br>
+                            jsmith@email.com
+                        </address>*@
                 </div>
                 <div class="col-xs-6 text-right">
                     <address>
@@ -82,13 +97,13 @@
                             <tbody>
                                 @foreach (var item in ViewBag.cart)
                                 {
-                                <tr>
-                                    @*<td>@ViewBag.Payments.PaymentId</td>*@
-                                    <td>@item.Products.ProductName</td>
-                                    <td class="text-center">@item.Products.ProductPrice</td>
-                                    <td class="text-center">@item.Quantity</td>
-                                    <td class="text-right">@(item.Products.ProductPrice * item.Quantity)</td>
-                                </tr>
+                                    <tr>
+                                        @*<td>@ViewBag.Payments.PaymentId</td>*@
+                                        <td>@item.Products.ProductName</td>
+                                        <td class="text-center">@item.Products.ProductPrice</td>
+                                        <td class="text-center">@item.Quantity</td>
+                                        <td class="text-right">@(item.Products.ProductPrice * item.Quantity)</td>
+                                    </tr>
                                 }
 
 
@@ -110,4 +125,4 @@
         </div>
     </div>
 </div>
-<a asp-controller="Home" asp-action="Index" class="btn btn-sm btn-outline-success">Back to List</a>
+<a asp-controller="Cart" asp-action="Index" class="btn btn-sm btn-outline-success">Back to List</a>

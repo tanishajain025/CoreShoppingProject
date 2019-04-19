@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoreShoppingAdminPortal.Migrations
 {
     [DbContext(typeof(ShopDataDbContext))]
-    [Migration("20190416053112_PayInitial1")]
-    partial class PayInitial1
+    [Migration("20190418193507_InitialDomain")]
+    partial class InitialDomain
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

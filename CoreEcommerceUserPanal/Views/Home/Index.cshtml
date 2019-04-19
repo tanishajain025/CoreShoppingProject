@@ -16,20 +16,18 @@
                     <div class="row single-slide align-items-center d-flex">
                         <div class="col-lg-5 col-md-6">
                             <div class="banner-content">
-                                <h1>Nike New <br>Collection!</h1>
+                                <h1>New <br>Collection!</h1>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                                    <i>
+                                        "There is a little bit of magic found in buying something new. It is instant gratification, a quick fix.”
+                                    </i>
                                 </p>
-                                <div class="add-bag d-flex align-items-center">
-                                    <a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
-                                    <span class="add-text text-uppercase">Add to Bag</span>
-                                </div>
+
                             </div>
                         </div>
                         <div class="col-lg-7">
                             <div class="banner-img">
-                                <img class="img-fluid" src="~/img/banner/banner-img.png" alt="">
+                                <img class="img-fluid" src="~/images/pic.jpg" alt="" height="700" width="300">
                             </div>
                         </div>
                     </div>
@@ -37,20 +35,18 @@
                     <div class="row single-slide">
                         <div class="col-lg-5">
                             <div class="banner-content">
-                                <h1>Nike New <br>Collection!</h1>
+                                <h1>New <br>Collection!</h1>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                                    <i>
+                                        "When women are depressed, they eat or go shopping. Men invade another country. It’s a whole different way of thinking"
+                                    </i>
                                 </p>
-                                <div class="add-bag d-flex align-items-center">
-                                    <a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
-                                    <span class="add-text text-uppercase">Add to Bag</span>
-                                </div>
+
                             </div>
                         </div>
                         <div class="col-lg-7">
                             <div class="banner-img">
-                                <img class="img-fluid" src="~/img/banner/banner-img.png" alt="">
+                                <img class="img-fluid" src="~/images/banner3.jpg" alt="">
                             </div>
                         </div>
                     </div>
@@ -108,35 +104,201 @@
     </div>
 </section>
 <!-- end features Area -->
-
-<div class="album py-5 bg-light">
+<!-- Start category Area -->
+<section class="category-area">
     <div class="container">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                @*Thumbnail Start*@
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8">
+                        <div class="single-deal">
+                            <div class="overlay"></div>
+                            <img class="img-fluid w-100" src="~/images/abt.jpg" alt="">
+                            <a href="img/category/c1.jpg" class="img-pop-up" target="_blank">
+                                <div class="deal-details">
+                                    <h6 class="deal-title">Shopping is my cardio</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="single-deal">
+                            <div class="overlay"></div>
+                            <img class="img-fluid w-100" src="~/images/Women2.jpg" alt="">
+                            <a href="img/category/c2.jpg" class="img-pop-up" target="_blank">
+                                <div class="deal-details">
+                                    <h6 class="deal-title">Something traditional</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="single-deal">
+                            <div class="overlay"></div>
+                            <img class="img-fluid w-100" src="~/images/AboutUs1.jpg" alt="">
+                            <a href="img/category/c3.jpg" class="img-pop-up" target="_blank">
+                                <div class="deal-details">
+                                    <h6 class="deal-title">Shopping a day start</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                        <div class="single-deal">
+                            <div class="overlay"></div>
+                            <img class="img-fluid w-100" src="~/images/banner1.jpg" alt="">
+                            <a href="img/category/c4.jpg" class="img-pop-up" target="_blank">
+                                <div class="deal-details">
+                                    <h6 class="deal-title">Let's go and shop</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-deal">
+                    <div class="overlay"></div>
+                    <img class="img-fluid w-100" src="~/images/boys.png" alt="">
+                    <a href="img/category/c5.jpg" class="img-pop-up" target="_blank">
+                        <div class="deal-details">
+                            <h6 class="deal-title">Shopping For boys</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End category Area -->
 
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="@item.ProductImage" class="bd-placeholder-img card-img-top" height="400" width="200" />
-                        <div class="card-body">
-                            <p class="card-text" style="font-weight:bold;">@item.ProductName</p>
-                            <p class="card-text" style="font-weight:bold;">@item.ProductDescription</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    @*<button type="button" class="btn btn-sm btn-outline-secondary">View Details</button>*@
-                                    @*<button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>*@
+            <!-- start product Area -->
+<section class="owl-carousel active-product-area section_gap">
+    <!-- single product slide -->
+    <div class="single-product-slider">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <div class="section-title">
+                        <h1>Latest Products</h1>
+                        <p>
+                           Products to be Purchased
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- single product -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-product">
+                        @foreach (var item in Model)
+                        {
+                            <img class="img-fluid" src="@item.ProductImage" alt="">
+                            <div class="product-details">
+
+                                <h6>
+                                    @item.ProductName
+                                </h6>
+                                <h4>@item.ProductDescription</h4>
+                                <div class="price">
+                                    <h6>@item.ProductPrice</h6>
+                                  
+                                </div>
+
+                                <div class="prd-bottom">
                                     <a asp-controller="Cart" asp-action="Buy" asp-route-id="@item.ProductId" onclick="alert('Added To cart')" class="btn btn-sm btn-outline-secondary"> Add to Cart </a>&nbsp;&nbsp;&nbsp;
+
 
                                     <a asp-controller="Cart" asp-action="details" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-secondary"> View Details</a>
 
                                 </div>
                                 <h6 class="text-muted">@item.ProductQty Left</h6>
                             </div>
+                        }
+                        </div>
+                        
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- single product slide -->
+    <div class="single-product-slider">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <div class="section-title">
+                        <h1>Coming Products</h1>
+                        <p>
+                           Some More Products to adore
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- single product -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-product">
+                        @foreach (var item in Model)
+                        {
+                            <img class="img-fluid" src="@item.ProductImage" alt="">
+                            <div class="product-details">
+
+                                <h6>
+                                    @item.ProductName
+                                </h6>
+                                <h4>@item.ProductDescription</h4>
+                                <div class="price">
+                                    <h6>@item.ProductPrice</h6>
+
+                                </div>
+
+                                <div class="prd-bottom">
+                                    <a asp-controller="Cart" asp-action="Buy" asp-route-id="@item.ProductId" onclick="alert('Added To cart')" class="btn btn-sm btn-outline-secondary"> Add to Cart </a>&nbsp;&nbsp;&nbsp;
+
+
+                                    <a asp-controller="Cart" asp-action="details" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-secondary"> View Details</a>
+
+                                </div>
+                                <h6 class="text-muted">@item.ProductQty Left</h6>
+                            </div>
+                        }
+                    </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+</section>
+                <!-- single product slide -->
+
+                <div class="album py-5 bg-light">
+                    <div class="container">
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                @*Thumbnail Start*@
+
+                                <div class="col-md-4">
+                                    <div class="card mb-4 shadow-sm">
+                                        <img src="@item.ProductImage" class="bd-placeholder-img card-img-top" height="400" width="200" />
+                                        <div class="card-body">
+                                            <p class="card-text" style="font-weight:bold;">@item.ProductName</p>
+                                            <p class="card-text" style="font-weight:bold;">@item.ProductDescription</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    @*<button type="button" class="btn btn-sm btn-outline-secondary">View Details</button>*@
+                                                    @*<button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>*@
+                                                    <a asp-controller="Cart" asp-action="Buy" asp-route-id="@item.ProductId" onclick="alert('Added To cart')" class="btn btn-sm btn-outline-secondary"> Add to Cart </a>&nbsp;&nbsp;&nbsp;
+
+                                                    <a asp-controller="Cart" asp-action="details" asp-route-id="@item.ProductId" class="btn btn-sm btn-outline-secondary"> View Details</a>
+
+                                                </div>
+                                                <h6 class="text-muted">@item.ProductQty Left</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
-            }
-        </div>
-    </div>
-</div>

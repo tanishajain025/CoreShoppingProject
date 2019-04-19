@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CoreShoppingAdminPortal.Migrations
 {
-    public partial class CoreShoppingProjectCoreShoppingAdminPortalshops1 : Migration
+    public partial class InitialDomain : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,12 +24,26 @@ namespace CoreShoppingAdminPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Brands",
+                columns: table => new
+                {
+                    BrandId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    BrandName = table.Column<string>(nullable: true),
+                    BrandDescription = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Brands", x => x.BrandId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
                     ProductCategoryId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CategoryName = table.Column<string>(nullable: true),
+                    CategoryName = table.Column<string>(unicode: false, maxLength: 15, nullable: true),
                     CategoryDescription = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -67,7 +81,7 @@ namespace CoreShoppingAdminPortal.Migrations
                 {
                     VendorId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    VendorName = table.Column<string>(nullable: true),
+                    VendorName = table.Column<string>(unicode: false, maxLength: 15, nullable: true),
                     EmailId = table.Column<string>(nullable: true),
                     PhoneNo = table.Column<double>(nullable: false),
                     VendorDescription = table.Column<string>(nullable: true)
@@ -75,6 +89,28 @@ namespace CoreShoppingAdminPortal.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vendors", x => x.VendorId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Feedbacks",
+                columns: table => new
+                {
+                    FeedbackId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EmailId = table.Column<string>(nullable: true),
+                    PhoneNo = table.Column<long>(nullable: false),
+                    Comment = table.Column<string>(nullable: true),
+                    CustomerId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feedbacks", x => x.FeedbackId);
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,11 +146,18 @@ namespace CoreShoppingAdminPortal.Migrations
                     ProductImage = table.Column<string>(nullable: true),
                     ProductDescription = table.Column<string>(nullable: true),
                     VendorId = table.Column<int>(nullable: false),
-                    ProductCategoryId = table.Column<int>(nullable: false)
+                    ProductCategoryId = table.Column<int>(nullable: false),
+                    BrandId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.ProductId);
+                    table.ForeignKey(
+                        name: "FK_Products_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "BrandId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Products_Categories_ProductCategoryId",
                         column: x => x.ProductCategoryId,
@@ -126,6 +169,30 @@ namespace CoreShoppingAdminPortal.Migrations
                         column: x => x.VendorId,
                         principalTable: "Vendors",
                         principalColumn: "VendorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    PaymentId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PaymentStripeId = table.Column<string>(nullable: true),
+                    Amount = table.Column<int>(nullable: false),
+                    Paymentdate = table.Column<DateTime>(nullable: false),
+                    Cardno = table.Column<double>(nullable: false),
+                    CustomerId = table.Column<int>(nullable: false),
+                    OrderId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.PaymentId);
+                    table.ForeignKey(
+                        name: "FK_Payments_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -155,6 +222,11 @@ namespace CoreShoppingAdminPortal.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Feedbacks_CustomerId",
+                table: "Feedbacks",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderProducts_ProductId",
                 table: "OrderProducts",
                 column: "ProductId");
@@ -163,6 +235,16 @@ namespace CoreShoppingAdminPortal.Migrations
                 name: "IX_Orders_CustomerId",
                 table: "Orders",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payments_OrderId",
+                table: "Payments",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_BrandId",
+                table: "Products",
+                column: "BrandId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductCategoryId",
@@ -181,22 +263,31 @@ namespace CoreShoppingAdminPortal.Migrations
                 name: "Admins");
 
             migrationBuilder.DropTable(
+                name: "Feedbacks");
+
+            migrationBuilder.DropTable(
                 name: "OrderProducts");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "Payments");
 
             migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Brands");
 
             migrationBuilder.DropTable(
                 name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Vendors");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
         }
     }
 }

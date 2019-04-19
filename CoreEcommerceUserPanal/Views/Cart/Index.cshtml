@@ -18,53 +18,7 @@
     </div>
 </section>
 <!-- End Banner Area -->
-@*<h2>Cart Page</h2>
-    <table class="table table-hover">
-        <tr>
-            <th>Options</th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Photo</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Sub Total</th>
-        </tr>
 
-        @foreach (var item in ViewBag.cart)
-        {
-            <tr>
-                <td><a asp-controller="cart" asp-action="Remove" asp-route-id="@item.Products.ProductId">Remove</a></td>
-                <td>@item.Products.ProductId</td>
-                <td>@item.Products.ProductName</td>
-                <td><img src="@item.Products.ProductImage" width="60" /></td>
-
-                <td>@item.Products.ProductPrice</td>
-                <td>
-                    <a class="btn btn-default" asp-controller="cart" asp-action="Minus" asp-route-id="@item.Products.ProductId">-</a>@item.Quantity
-                    <a class="btn btn-default" asp-controller="cart" asp-action="Plus" asp-route-id="@item.Products.ProductId">+</a>
-                </td>
-
-                <td>@(item.Products.ProductPrice * item.Quantity)</td>
-            </tr>
-        }
-
-        <tr>
-            <td align="right" colspan="7">Sum</td>
-            <td>
-                @ViewBag.total
-            </td>
-        </tr>
-
-
-    </table>
-    <br />
-
-    <a asp-controller="Home" asp-action="Index"> Continue Shopping</a>
-    @if (ViewBag.i == 0)
-    {<a asp-controller="Customers" asp-action="Login1" >Checkout</a> }
-    else
-    {
-    <a asp-controller="cart" asp-action="Checkout"> CheckOut</a>}*@
 
 <!--================Cart Area =================-->
 <section class="cart_area">
@@ -75,6 +29,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Product</th>
+                            <th scope="col">Product Name</th>
                             <th scope="col">Price</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Total</th>
@@ -83,34 +38,29 @@
                     <tbody>
                         @foreach (var item in ViewBag.cart)
                         {
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="@item.Products.ProductImage" width="100" height="100" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <p>@item.Products.ProductName</p>
-                                        </div>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="@item.Products.ProductImage" width="100" height="100" alt="">
                                     </div>
-                                </td>
-                                <td>
-                                    <h5>@item.Products.ProductPrice</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="@item.Quantity" title="Quantity:"
-                                               class="input-text qty">
-                                        <button type="button" asp-controller="cart" asp-action="Minus" asp-route-id="@item.Products.ProductId"
-                                                class="increase items-count">
-                                            <i class="lnr lnr-chevron-up"></i>
-                                        </button>
-                                        <button type="button" asp-controller="cart" asp-action="Plus" asp-route-id="@item.Products.ProductId"
-                                                class="reduced items-count">
-                                            <i class="lnr lnr-chevron-down"></i>
-                                        </button>
-                                    </div>
-                                </td>
+                                </div>
+                            <td>
+                                <p>@item.Products.ProductName</p>
+                            </td>
+
+
+                            <td>
+                                <h5>@item.Products.ProductPrice</h5>
+                            </td>
+                          
+                           
+                            <td>
+                                <a class="btn btn-default" asp-controller="cart" asp-action="Minus" asp-route-id="@item.Products.ProductId">-</a>@item.Quantity
+                                <a class="btn btn-default" asp-controller="cart" asp-action="Plus" asp-route-id="@item.Products.ProductId">+</a>
+                            </td>
+
+                                 
                                 <td>
                                     <h5>@(item.Products.ProductPrice * item.Quantity)</h5>
                                 </td>
@@ -123,8 +73,9 @@
                                 <td></td>
                                 <td></td>
                                 <td>
+                                <td>
                                     <h5>Subtotal</h5>
-                                </td>
+                                </td></td>
                                 <td>
                                     <h5>@ViewBag.total</h5>
                                 </td>
@@ -136,7 +87,7 @@
                                 <td></td>
                                 <td>
                                     <div class="checkout_btn_inner d-flex align-items-center">
-                                        <a asp-controller="Home" asp-action="Index" class="gray_btn">Continue Shopping</a>
+                                        <a asp-controller="Home" asp-action="Index" class="gray_btn">Continue Shopping</a>&nbsp;
                                         @*<a class="primary-btn" href="#">Proceed to checkout</a>*@
                                         @if (ViewBag.i == 0)
                                         {
@@ -144,7 +95,7 @@
                                         }
                                         else
                                         {
-                                            <a class="primary-btn" asp-controller="cart" asp-action="Checkout">Proceed to CheckOut</a>
+                                            <a class="primary-btn" asp-controller="cart" asp-action="Checkout">Proceed to Checkout</a>
                                         }
                                     </div>
                                 </td>

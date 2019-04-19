@@ -10,8 +10,8 @@ namespace CoreEcommerceUserPanal.Models
         public int Amount { get; set; }
         public DateTime Paymentdate { get; set; }
         public double Cardno { get; set; }
-        public int OrderId { get; set; }
         public int CustomerId { get; set; }
+        public int OrderId { get; set; }
 
         public Orders Order { get; set; }
     }
