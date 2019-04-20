@@ -338,6 +338,7 @@ namespace CoreEcommerceUserPanal.Controllers
         [Route("search")]
         [HttpGet]
         public IActionResult Search(string search)
+
         {
 
             if (search == null)

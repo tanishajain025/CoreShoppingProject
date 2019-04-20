@@ -85,7 +85,7 @@
                             <li class="nav-item"><a asp-controller="cart" asp-action="Index" class="cart"><span class="ti-bag">
                                 @Context.Session.GetString("cartitem")</span></a></li>
                             <li class="nav-item">
-                                <button class="search" asp-action="Search" asp-controller="Cart" name="Search"><span  class="lnr lnr-magnifier" id="search"></span></button>
+                                <button class="search"  name="Search"><span  class="lnr lnr-magnifier" id="search"></span></button>
                             </li>
                         </ul>
 
@@ -96,8 +96,8 @@
         <div class="search_input" id="search_input_box">
             <div class="container">
                 <form class="d-flex justify-content-between">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                    <button type="submit" class="btn"></button>
+                    <input type="text" class="form-control" name="search" id="search_input" placeholder="Search Here">
+                    <button type="submit" asp-action="Search" asp-controller="Cart" class="btn"></button>
                     <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
                 </form>
             </div>
