@@ -335,50 +335,22 @@ namespace CoreEcommerceUserPanal.Controllers
             return RedirectToAction("Index");
         }
 
-        [Route("Search")]
-        [HttpPost]
+        [Route("search")]
+        [HttpGet]
         public IActionResult Search(string search)
         {
-            //if (search == null)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-            //var product = context.Products.Where(x => x.ProductName == Search || x.ProductCategory.CategoryName == Search
-            // || x.Brand.BrandName == Search || Search == null).ToList();
 
-            //return View(product);
-
-            List<Products> prod = new List<Products>();
-            var product = context.Products.Where(x => x.ProductName == search).ToList();
-            if (context.Brands.Where(x => x.BrandName == search).SingleOrDefault() != null)
+            if (search == null)
             {
-                Brands b = context.Brands.Where(x => x.BrandName == search).SingleOrDefault();
-                var brand = context.Products.Where(x => x.BrandId == b.BrandId).ToList();
-                foreach (var item in brand)
-                {
-                    prod.Add(item);
-
-                }
-            }
-            if (context.Categories.Where(x => x.CategoryName == search).SingleOrDefault() != null)
-            {
-                Categories c = context.Categories.Where(x => x.CategoryName == search).SingleOrDefault();
-                var category = context.Products.Where(x => x.ProductCategoryId == c.ProductCategoryId).ToList();
-                foreach (var item in category)
-                {
-                    prod.Add(item);
-
-                }
+                return RedirectToAction("Index", "Home");
             }
 
-            foreach (var item in product)
-            {
-                prod.Add(item);
+            HttpContext.Session.SetString("Search", search.ToString());
 
-            }
+            ViewBag.Hotel = context.Products.Where(x => x.ProductName == search || x.ProductDescription == search  || search == null).ToList();
+            return View(context.Products.Where(x => x.ProductName == search || search == null).ToList());
+           
 
-
-            return View(prod);
         }
 
     }
