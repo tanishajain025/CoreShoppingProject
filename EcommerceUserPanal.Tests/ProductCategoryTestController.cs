@@ -19,7 +19,7 @@ namespace EcommerceUserPanal.Tests
         { get; set; }
 
         public static string connectionString =
- "Data Source=DESKTOP-6AH65S5; Initial Catalog=ShoppingProject;Integrated Security=true;";
+ "Data Source=TRD-519; Initial Catalog=ShoppingProject;Integrated Security=true;";
 
         static ProductCategoryTestController()
         {

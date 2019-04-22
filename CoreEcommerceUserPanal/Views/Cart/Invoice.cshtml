@@ -27,15 +27,14 @@
                 <div class="details_item">
                     <h4>Order Info</h4>
                     <ul class="list">
-                        <li><span>Order number</span> : </li>
+                        <li><span>Order number</span> : @ViewBag.Od.OrderId</li>
+                        <li><span>Payment Id</span> : @ViewBag.Payment.PaymentId</li>
                         <li>
-    <span>Date</span> :
-    <script>
-        document.getElementById("date").innerHTML = Date();
-    </script>
-</li>
+                            <span>Date</span> :@ViewBag.Od.OrderDate
+                            
+                        </li>
                         <li><span>Total</span> : @ViewBag.total</li>
-                       
+
                     </ul>
                 </div>
             </div>
@@ -44,7 +43,7 @@
                     <h4>Billing Address</h4>
                     <ul class="list">
                         <li><span>Name </span> :   @ViewBag.Customers.FirstName&nbsp;&nbsp;@ViewBag.Customers.LastName<br></li>
-                        <li><span>Street</span> : @ViewBag.Customers.Address</li>
+                        <li><span>Address</span> : @ViewBag.Customers.Address</li>
                         <li><span>State</span> :  @ViewBag.Customers.State</li>
                         <li><span>Country</span> : @ViewBag.Customers.Country</li>
                         <li><span>Zip </span> :@ViewBag.Customers.Zip</li>

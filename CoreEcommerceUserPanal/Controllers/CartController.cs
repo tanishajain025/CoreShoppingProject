@@ -248,7 +248,7 @@ namespace CoreEcommerceUserPanal.Controllers
             context.Add<Payments>(payment);
             context.Payments.Add(payment);
             context.SaveChanges();
-
+            TempData["pay"] = payment.PaymentId;
             return RedirectToAction("Invoice");
 
         }
@@ -274,8 +274,16 @@ namespace CoreEcommerceUserPanal.Controllers
         public IActionResult Invoice()
         {
             int customerid = int.Parse(TempData["cust"].ToString());
+            int paymentid = int.Parse(TempData["pay"].ToString());
+            int orderid = int.Parse(TempData["orderId"].ToString());
             Customers customer = context.Customers.Where(x => x.CustomerId == customerid).SingleOrDefault();
             ViewBag.Customers = customer;
+
+           Payments payment = context.Payments.Where(x => x.PaymentId == paymentid).SingleOrDefault();
+            ViewBag.Payment = payment;
+
+            Orders ord = context.Orders.Where(x => x.OrderId == orderid).SingleOrDefault();
+            ViewBag.Od = ord;
 
             var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
@@ -348,8 +356,8 @@ namespace CoreEcommerceUserPanal.Controllers
 
             HttpContext.Session.SetString("Search", search.ToString());
 
-            ViewBag.Hotel = context.Products.Where(x => x.ProductName == search || x.ProductDescription == search  || search == null).ToList();
-            return View(context.Products.Where(x => x.ProductName == search || search == null).ToList());
+            ViewBag.prodt = context.Products.Where(x => x.ProductName == search || x.ProductDescription == search  || search == null).ToList();
+            return View();
            
 
         }
